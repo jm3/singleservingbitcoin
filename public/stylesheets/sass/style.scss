@@ -1,0 +1,82 @@
+@import "compass";
+@import "compass/reset";
+
+body {
+  color: #333;
+  font-family: Helvetica, san-serif;
+}
+
+@mixin buttonize {
+  font-weight: bold;
+  @include text-shadow(-0.1em 0.1em #eee);
+  color: #555;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #999;
+
+  @include border-radius(7px);
+  @include background-image(linear-gradient(#eee, #bbb));
+
+  &.zeroclipboard-is-hover, &:hover {
+    @include background-image(linear-gradient(#ccc, #ccc));
+  }
+  &.zeroclipboard-is-active {
+    @include box-shadow(inset 0 2px 4px rgba(0, 0, 0, 0.15),0 1px 2px rgba(0, 0, 0, 0.05));
+  }
+}
+
+#message {
+  display: inline-block;
+  font-size: 48px;
+}
+
+p {
+  margin: 40px 0;
+}
+
+#index-body, #message-body {
+  text-align: center;
+}
+
+#index-body button {
+  @include buttonize;
+}
+
+.editing-buttons {
+  display: none;
+}
+
+.bitcoin-address {
+  display: inline-block;
+  @include clearfix;
+  @include border-top-right-radius(7px);
+  @include border-bottom-right-radius(7px);
+
+  input, .copy {
+    float: left;
+  }
+
+  input {
+    border: 1px solid #999;
+    margin: 0;
+    font-size: 18px;
+    padding: 6px;
+    width: 370px;
+    border-right: none;
+    color: #333;
+  }
+
+  .copy {
+    @include buttonize;
+    @include border-top-left-radius(0);
+    @include border-bottom-left-radius(0);
+  }
+}
+
+.copied-message {
+  background-color: #333;
+  color: #fff;
+  position: absolute;
+  padding: 10px;
+  @include border-radius(5px);
+}

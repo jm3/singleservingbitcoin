@@ -1,0 +1,15 @@
+%table.queue
+  %thead
+    %tr
+      %th bid
+      %th message
+      %th address
+      %th time remaining
+  %tbody
+    -@queue.each do |message|
+      %tr
+        %td= message.bid
+        %td= message.message
+        %td
+          = haml :_address, :locals => {:address => message.address}
+        %td.time-remaining(data-seconds="#{message.time_remaining}")

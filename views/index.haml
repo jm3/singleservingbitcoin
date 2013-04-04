@@ -1,0 +1,18 @@
+%p
+  %span#message
+    - if @winner
+      = @winner.message
+    - else
+      Nothing to see here yet.
+
+%p
+  %button.change Change what this says.
+  .editing-buttons
+    %button.nevermind Nevermind
+    %button.submit Submit
+
+%p
+  %a(href='/queue') View all messages in the queue
+
+%form(action='/messages' method='POST')
+  %input(type='hidden' name='message')
