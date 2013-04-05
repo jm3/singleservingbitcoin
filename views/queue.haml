@@ -8,7 +8,7 @@
   %tbody
     -@queue.each do |message|
       %tr(class="#{'winner' if @winner && message.id == @winner.id}")
-        %td= message.bid
+        %td= btc_format(message.bid)
         %td
           %a(href="/messages/#{message.id}")= message.message
         %td

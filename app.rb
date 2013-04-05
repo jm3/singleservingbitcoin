@@ -12,6 +12,12 @@ class App < Sinatra::Base
         File.join(Sinatra::Application.root, 'compass.rb'))
   end
 
+  helpers do
+    def btc_format(number)
+      "#{number / 100000000.0} BTC"
+    end
+  end
+
   get '/' do
     @winner = Message.find_winner
     render_template :index
