@@ -14,7 +14,7 @@
       %tr(class="#{'winner' if @winner && message.id == @winner.id}")
         %td= btc_format(message.bid)
         %td
-          %a(href="/messages/#{message.id}")= message.message
+          %a(href="/messages/#{message.id}")= h(truncate(message.message))
         %td
           = haml :_address, :locals => {:address => message.address}
         %td.time-remaining(data-seconds="#{message.time_remaining}")

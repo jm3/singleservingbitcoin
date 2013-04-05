@@ -16,6 +16,17 @@ class App < Sinatra::Base
     def btc_format(number)
       "#{number / 100000000.0} BTC"
     end
+    def h(text)
+      Rack::Utils.escape_html(text)
+    end
+    def truncate(string)
+      string = string.strip
+      if string.length > 25
+        string[0...25] + '...'
+      else
+        string
+      end
+    end
   end
 
   get '/' do
@@ -27,6 +38,10 @@ class App < Sinatra::Base
     @winner = Message.find_winner
     @queue = Message.eligible
     render_template :queue
+  end
+
+  get 'what_is_this' do
+    haml :what_is_this
   end
 
   get '/qrcode/:address.png' do
@@ -48,7 +63,8 @@ class App < Sinatra::Base
   end
 
   post '/messages' do
-    message = Message.create(params[:message])
+    html = Nokogiri::HTML(params[:message])
+    message = Message.create(html.inner_text)
     redirect "/messages/#{message.id}"
   end
 

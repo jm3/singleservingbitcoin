@@ -24,6 +24,7 @@ GEM
       tilt
     json (1.7.7)
     multi_json (1.7.2)
+    nokogiri (1.5.6)
     rack (1.5.2)
     rack-asset-compiler (0.2.1)
       rack
@@ -73,6 +74,7 @@ DEPENDENCIES
   compass
   haml
   json
+  nokogiri
   rack-asset-compiler
   rack-cache
   redis

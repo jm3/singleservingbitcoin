@@ -12,6 +12,13 @@ configureIndex = ($index) ->
   $message = $('#message')
   originalHtml = undefined
 
+  # Make sure that only text is added into the message field
+  $message.on 'change keyup paste', ->
+    children = (child for child in @childNodes)
+    for child in children when child.nodeName != '#text'
+      @removeChild(child)
+    undefined
+
   toggleEditing = (enabled) ->
     if enabled
       $message.attr('contenteditable', 'true')

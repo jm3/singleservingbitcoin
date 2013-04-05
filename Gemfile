@@ -5,6 +5,7 @@ gem 'json'
 gem 'rack-cache'
 gem 'redis'
 gem 'haml'
+gem 'nokogiri'
 gem 'compass', :require => false
 gem 'sinatra', :require => false
 gem 'bitcoin-ruby', :require => 'bitcoin'
