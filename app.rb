@@ -8,8 +8,8 @@ require_relative './message'
 
 class App < Sinatra::Base
   configure do
-  Compass.add_project_configuration(
-      File.join(Sinatra::Application.root, 'compass.rb'))
+    Compass.add_project_configuration(
+        File.join(Sinatra::Application.root, 'compass.rb'))
   end
 
   get '/' do
@@ -18,7 +18,8 @@ class App < Sinatra::Base
   end
 
   get '/queue' do
-    @queue = Database.queue
+    @winner = Message.find_winner
+    @queue = Message.eligible
     render_template :queue
   end
 
@@ -46,6 +47,7 @@ class App < Sinatra::Base
   end
 
 private
+
   def render_template(template)
     haml template, :locals => {:body_id => "#{template}-body"}
   end

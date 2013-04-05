@@ -45,7 +45,10 @@ configureIndex = ($index) ->
     false
 
 configureQueue = ($queue) ->
-  $time = $queue.find('tbody tr:first .time-remaining')
+  $queue.find('.time-remaining').each -> formatTime(this)
+
+  $time = $queue.find('tbody tr.winner .time-remaining')
+  return unless $time.length > 0
 
   timer = ->
     value = parseFloat($time.attr('data-seconds'))
@@ -54,8 +57,6 @@ configureQueue = ($queue) ->
       formatTime($time[0])
 
   setInterval(timer, 1000)
-
-  $queue.find('.time-remaining').each -> formatTime(this)
 
 formatTime = (element) ->
   seconds = element.getAttribute('data-seconds')

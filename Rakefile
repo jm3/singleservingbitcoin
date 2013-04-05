@@ -1,21 +1,26 @@
 require 'bundler'
+require 'resque/tasks'
+require 'resque_scheduler/tasks'
+
 Bundler.require
 
 require_relative './database'
 
 task :pick_winner do
-  Database.pick_winner
+  message = Database.pick_winner
+  if message
+    puts "The current winner is [#{message.id}] #{message.message}"
+  else
+    puts "There is no current winner"
+  end
 end
 
 desc 'Polls blockchain.info to update all the bid values'
 task :poll_blockchain do
-  Message.open_blockchain do |http|
-    Database.queue.each do |message|
-      message.poll_blockchain(http)
-    end
-  end
+  Jobs::PollBlockchain.perform
 end
 
+desc 'Reads the `addressess` file and adds it to redis'
 task :import_addresses do
   count = 0
   File.open('addresses', 'r') do |file|
@@ -33,6 +38,7 @@ task :import_addresses do
   puts "Imported #{count} addresses"
 end
 
+desc 'Generate keys.json and addresses files'
 task :generate_keypairs do
   keys = 1000.times.collect do
     private_key, public_key = Bitcoin::generate_key
@@ -58,5 +64,18 @@ task :generate_keypairs do
     keys.each do |item|
       file.puts item['address']
     end
+  end
+end
+
+namespace :resque do
+  task :setup do
+    require_relative './jobs'
+
+    Resque.schedule = {
+      'poll_blockchain' => {
+        'every' => '1m',
+        'class' => Jobs::PollBlockchain
+      }
+    }
   end
 end
