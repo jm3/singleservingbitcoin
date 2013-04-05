@@ -45,10 +45,10 @@ configureIndex = ($index) ->
     false
 
 configureQueue = ($queue) ->
-  $queue.find('.time-remaining').each -> formatTime(this)
-
-  $time = $queue.find('tbody tr.winner .time-remaining')
+  $time = $queue.find('tbody tr.winner td.time-remaining')
   return unless $time.length > 0
+
+  formatTime($time[0])
 
   timer = ->
     value = parseFloat($time.attr('data-seconds'))

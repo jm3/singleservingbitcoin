@@ -30,7 +30,11 @@ body {
   font-size: 48px;
 }
 
-p {
+h1 {
+  font-size: 24px;
+}
+
+h1, p {
   margin: 40px 0;
 }
 
@@ -40,6 +44,31 @@ p {
 
 #index-body button {
   @include buttonize;
+}
+
+#queue-body {
+  width: 920px;
+  margin: 0 auto;
+
+  table {
+    th {
+      font-weight: bold;
+    }
+    td, th {
+      padding: 5px;
+    }
+    tr.winner {
+      border: 1px solid green;
+      background-color: #bfb;
+
+      td.time-remaining {
+        display: table-cell;
+      }
+    }
+    td.time-remaining {
+      display: none;
+    }
+  }
 }
 
 .editing-buttons {
@@ -54,14 +83,14 @@ p {
 
   input, .copy {
     float: left;
+    padding: 10px;
+    font-size: 16px;
   }
 
   input {
+    font-family: monospace;
     border: 1px solid #999;
     margin: 0;
-    font-size: 18px;
-    padding: 6px;
-    width: 370px;
     border-right: none;
     color: #333;
   }
@@ -79,4 +108,5 @@ p {
   position: absolute;
   padding: 10px;
   @include border-radius(5px);
+  @include box-shadow(3px 3px 15px #AAA);
 }

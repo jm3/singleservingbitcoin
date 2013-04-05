@@ -55,6 +55,7 @@ class Message < OpenStruct
       message_id = redis.incr 'messages:id'
 
       message = Message.new(
+        'created_at' => Time.now.to_i,
         'id' => message_id,
         'address' => Database.remove_address,
         'message' => message,
