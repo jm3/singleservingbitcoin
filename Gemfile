@@ -1,10 +1,13 @@
-source :rubygems
+source 'https://rubygems.org'
+
+ruby '2.0.0'
 
 gem 'thin'
 gem 'json'
 gem 'rack-cache'
 gem 'redis'
 gem 'haml'
+gem 'em-http-request', :require => 'em-http'
 gem 'nokogiri'
 gem 'compass', :require => false
 gem 'sinatra', :require => false
