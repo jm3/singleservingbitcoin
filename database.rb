@@ -1,12 +1,23 @@
 require 'ostruct'
 require 'logger'
+require 'connection_pool'
+
 require_relative './message'
 require_relative './jobs'
 
 class Database
   class << self
     def redis
-      @@redis ||= Redis.new
+      @@pool_wrapper ||= begin
+        ConnectionPool::Wrapper.new(size: 16, timeout: 5) do
+          if ENV['REDIS_PORT']
+            uri = URI.parse(ENV['REDIS_PORT'])
+            Redis.new(host: uri.host, port: uri.port, password: uri.password)
+          else
+            Redis.new
+          end
+        end
+      end
     end
 
     def add_address(address)
