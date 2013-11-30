@@ -59,6 +59,15 @@ class App < Sinatra::Base
 
   get '/messages/:id' do
     @message = Message.find(params[:id]) || halt(404)
+
+    incr = 100000
+    winner = Message.find_winner
+    if winner
+      @min_bid = (winner.bid - @message.bid) + incr
+    else
+      @min_bid = incr
+    end
+
     render_template :message
   end
 

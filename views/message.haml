@@ -2,8 +2,9 @@
   %span#message= h(@message.message)
 
 %p
-  To see your change on the front page, send a payment of at least .004 BTC to
-  the following address:
+  To see your change on the front page, send a payment of at least
+  = btc_format(@min_bid)
+  to the following address:
 
 %p
   = haml :_address, :locals => {:address => @message.address}
@@ -11,15 +12,17 @@
 %img(src="/qrcode/#{@message.address}.png")
 
 %p
-  Your message will be displayed for 10 minutes, or until someone else submits a
-  higher payment.
+  Your message will be displayed for 1 hour, or until someone else outbids you.
 
 %p
   If your message is bumped off, the clock will stop ticking and will resume when
   your message is reactivated.
 
 %p
-  You are free to send in more payments later.
+  You can send in another payment at anytime to outbid the current winner.
 
 %p
   %a(href='/queue') View a queue of all messages
+
+%p
+  %a(href='/') return home
