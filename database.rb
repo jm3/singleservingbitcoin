@@ -4,18 +4,14 @@ require 'connection_pool'
 
 require_relative './message'
 require_relative './jobs'
+require_relative './docker_env'
 
 class Database
   class << self
     def redis
       @@pool_wrapper ||= begin
         ConnectionPool::Wrapper.new(size: 16, timeout: 5) do
-          if ENV['REDIS_PORT']
-            uri = URI.parse(ENV['REDIS_PORT'])
-            Redis.new(host: uri.host, port: uri.port, password: uri.password)
-          else
-            Redis.new
-          end
+          Redis.new
         end
       end
     end

@@ -5,6 +5,7 @@ require 'resque_scheduler/tasks'
 Bundler.require
 
 require_relative './database'
+require_relative './docker_env'
 
 task :pick_winner do
   message = Database.pick_winner
