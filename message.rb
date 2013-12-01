@@ -59,7 +59,7 @@ class Message < OpenStruct
         'id' => message_id,
         'address' => Database.remove_address,
         'message' => message,
-        'time_remaining' => 60 * 10)
+        'time_remaining' => 60 * 60)
 
       message.save
       message.update_bid(0)
