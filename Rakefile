@@ -75,7 +75,7 @@ namespace :resque do
 
     Resque.schedule = {
       'poll_blockchain' => {
-        'every' => '1m',
+        'every' => '30s',
         'class' => Jobs::PollBlockchain
       }
     }
