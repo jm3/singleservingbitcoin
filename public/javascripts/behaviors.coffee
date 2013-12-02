@@ -38,6 +38,8 @@ configureIndex = ($index) ->
     selection.removeAllRanges()
     selection.addRange(range)
 
+    $message.focus()
+
     false
 
   $index.find('.submit').on 'click', ->
