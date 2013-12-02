@@ -51,7 +51,7 @@ class Message < OpenStruct
       eligible.select{ |message| message.bid > 0 }
     end
 
-    def create(message)
+    def create(message, ip_address)
       message_id = redis.incr 'messages:id'
 
       message = Message.new(
@@ -59,6 +59,7 @@ class Message < OpenStruct
         'id' => message_id,
         'address' => Database.remove_address,
         'message' => message,
+        'ip_address' => ip_address,
         'time_remaining' => 60 * 60)
 
       message.save

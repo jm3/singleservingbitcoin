@@ -23,3 +23,8 @@ gem 'rack-asset-compiler'
 gem 'resque'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 gem 'therubyracer'
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test'
+end

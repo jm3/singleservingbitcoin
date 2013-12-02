@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/base'
 require 'barby/outputter/png_outputter'
 require 'barby/barcode/qr_code'
+require 'compass'
 
 require_relative './database'
 require_relative './message'
@@ -9,7 +10,7 @@ require_relative './message'
 class App < Sinatra::Base
   configure do
     Compass.add_project_configuration(
-        File.join(Sinatra::Application.root, 'compass.rb'))
+        File.join(File.dirname(__FILE__), 'compass.rb'))
   end
 
   helpers do
@@ -73,7 +74,7 @@ class App < Sinatra::Base
 
   post '/messages' do
     html = Nokogiri::HTML(params[:message])
-    message = Message.create(html.inner_text)
+    message = Message.create(html.inner_text, request.ip)
     redirect "/messages/#{message.id}"
   end
 

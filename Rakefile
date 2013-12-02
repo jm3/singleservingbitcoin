@@ -1,6 +1,7 @@
 require 'bundler'
 require 'resque/tasks'
 require 'resque_scheduler/tasks'
+require 'rspec/core/rake_task'
 
 Bundler.require
 
@@ -79,4 +80,9 @@ namespace :resque do
       }
     }
   end
+end
+
+RSpec::Core::RakeTask.new do |task|
+  task.rspec_opts = ["-r ./spec/spec_helper.rb"]
+  task.pattern    = 'spec/*_spec.rb'
 end
