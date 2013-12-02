@@ -1,6 +1,7 @@
 require 'ostruct'
 require 'logger'
 require 'connection_pool'
+require 'redis'
 
 require_relative './message'
 require_relative './jobs'

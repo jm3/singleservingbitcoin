@@ -25,7 +25,11 @@ body {
   }
 }
 
-#message {
+#message-p {
+  width: auto !important;
+}
+
+span#message {
   display: inline-block;
   font-size: 48px;
 }
@@ -40,6 +44,13 @@ h1, p {
 
 #index-body, #message-body {
   text-align: center;
+
+  p {
+    width: 730px;
+    line-height: 1.5;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 #index-body button {

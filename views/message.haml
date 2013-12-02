@@ -1,4 +1,4 @@
-%p
+%p#message-p
   %span#message= h(@message.message)
 
 %p
@@ -15,14 +15,25 @@
   Your message will be displayed for 1 hour, or until someone else outbids you.
 
 %p
-  If your message is bumped off, the clock will stop ticking and will resume when
-  your message is reactivated.
+  If you are outbid, the clock will stop ticking and your message will be
+  removed. Your message will reappear when the winning message expires, or
+  you increase your bid.
 
 %p
-  You can send in another payment at anytime to outbid the current winner.
+  Your bid may take up to a minute to be received through the bitcoin network.
+
+%p
+  This is a bitcoin expiriment by
+  = surround '', '.' do
+    %a(href='http://www.github.com/jbaudanza')Jonathan Baudanza
+
+  All proceeds will benefit
+  = surround '', ',' do
+    %a(href='http://www.wishbone.org')> wishbone.org
+  a non-profit that sends low-income high school students to extracurricular
+  programs.
 
 %p
   %a(href='/queue') View a queue of all messages
-
-%p
+  %br
   %a(href='/') return home

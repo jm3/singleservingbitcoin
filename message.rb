@@ -93,6 +93,11 @@ class Message < OpenStruct
     "messages:#{id}"
   end
 
+  def destroy
+    Database.redis.del redis_key
+    Database.redis.zrem 'queue', id
+  end
+
   def update_bid(value)
     self.bid = value
     Database.redis.hset redis_key, 'bid', value
