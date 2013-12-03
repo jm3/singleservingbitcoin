@@ -12,7 +12,22 @@
     %button.submit Submit
 
 %p
-  %a(href='/queue') View all messages in the queue
+  You can bid with bitcoins to write whatever you want on my webpage.
+
+  This is a bitcoin experiment by
+  = surround '', '.' do
+    %a(href='http://www.github.com/jbaudanza')Jonathan Baudanza
+
+  All proceeds will benefit
+  = surround '', ',' do
+    %a(href='http://www.wishbone.org')> wishbone.org
+  a non-profit that sends low-income high school students to extracurricular
+  programs.
+
+
+%p
+  %a(href='/queue') View all the bids
+
 
 %form(action='/messages' method='POST')
   %input(type='hidden' name='message')
