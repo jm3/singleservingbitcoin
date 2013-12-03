@@ -82,12 +82,8 @@ configureAddresses = ($addresses) ->
   ZeroClipboard.setDefaults(moviePath: '/swfs/ZeroClipboard.swf')
 
   $('.bitcoin-address').on 'click', 'input', ->
-    selection = window.getSelection()
-    selection.removeAllRanges()
-
-    range = document.createRange()
-    range.selectNode(this)
-    selection.addRange(range)
+    @selectionStart = 0
+    @selectionEnd = @value.length
 
   clip = new ZeroClipboard($('.bitcoin-address .copy'))
 
