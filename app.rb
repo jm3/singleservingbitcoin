@@ -21,7 +21,7 @@ class App < Sinatra::Base
       Rack::Utils.escape_html(text)
     end
     def truncate(string)
-      string = string.strip
+      string = string.force_encoding('UTF-8').strip
       if string.length > 25
         string[0...25] + '...'
       else
